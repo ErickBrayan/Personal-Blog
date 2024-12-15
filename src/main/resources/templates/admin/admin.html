@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal-Blog</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .article-link {
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-link:hover {
+            text-decoration: underline;
+        }
+
+        .action-link {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+        .list-group {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .me-2 {
+            margin-right: 0.5rem;
+        }
+
+        .text-danger {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="card-container">
+    <div class="card-header">
+        <span>Personal Blog</span>
+        <a th:href="@{/new}" class="action-link">+ Add</a>
+    </div>
+    <ul class="list-group list-group-flush mt-3" th:each="article : ${articles}">
+        <li class="list-group-item">
+            <a th:href="@{/article/{articleId}(articleId=${article.id()})}" th:text="*{article.title()}" class="article-link">My first article</a>
+            <span>
+                    <a th:href="@{/edit/{articleId}(articleId=${article.id()})}" class="action-link me-2">Edit</a>
+                    <a th:href="@{/delete/{articleId}(articleId=${article.id()})}" class="action-link text-danger">Delete</a>
+                </span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
